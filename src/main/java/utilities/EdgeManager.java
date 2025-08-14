@@ -2,6 +2,8 @@ package utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,9 +19,20 @@ public class EdgeManager {
     ;
 
     public static WebDriver edgeManagerLocal() {
-        WebDriverManager.edgedriver().setup();
-        EdgeOptions edgeOptions = new EdgeOptions();
-        return new EdgeDriver(edgeOptions);
+        try {
+            WebDriverManager.edgedriver().setup();
+            return new EdgeDriver();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize Local ChromeDriver: " + e.getMessage(), e);
+        }
+    }
+    public static WebDriver edgeManagerLocal(EdgeOptions options) {
+        try {
+            WebDriverManager.edgedriver().setup();
+            return new EdgeDriver(options);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize Local ChromeDriver: " + e.getMessage(), e);
+        }
     }
 
 }

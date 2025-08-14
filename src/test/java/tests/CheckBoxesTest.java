@@ -10,7 +10,11 @@ public class CheckBoxesTest extends BaseDriver {
     @Test
     public void checkboxesTest() {
         CheckBoxes checkBoxes = new CheckBoxes(driver,wait);
-        checkBoxes.navigateTo().getAllCheckboxesInMap();
+        checkBoxes.navigateTo().getCheckBoxes();
+        checkBoxes.isSelectCheckBox("checkbox 1");
+        checkBoxes.checkABox("checkbox 1");
+        checkBoxes.isSelectCheckBox("checkbox 1");
+        checkBoxes.isSelectCheckBox("checkbox 2");
 
     }
 }

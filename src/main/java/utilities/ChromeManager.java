@@ -22,5 +22,13 @@ public class ChromeManager {
             throw new RuntimeException("Failed to initialize Local ChromeDriver: " + e.getMessage(), e);
         }
     }
+    public static WebDriver chromeManagerLocal(ChromeOptions options) {
+        try {
+            WebDriverManager.chromedriver().setup();
+            return new ChromeDriver(options);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize Local ChromeDriver: " + e.getMessage(), e);
+        }
+    }
 
 }
