@@ -1,84 +1,71 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.example</groupId>
   <artifactId>SonoraNearshore</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Archetype - SonoraNearshore</name>
   <url>http://maven.apache.org</url>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
     <selenium.version>4.12.1</selenium.version>
     <testng.version>7.4.0</testng.version>
-    <junit.version>3.8.1</junit.version>
     <webdrivermanager.version>5.8.0</webdrivermanager.version>
-    <apache.poi.version>5.2.5</apache.poi.version>
-    <apache.poi.ooxml.version>5.2.5</apache.poi.ooxml.version>
-    <commons.coll.version>4.4</commons.coll.version>
-    <xmlbeans.version>5.0.3</xmlbeans.version>
-    <extentreports.version>5.0.9</extentreports.version>
-    <reportng.version>1.1.4</reportng.version>
-    <appium.java.version>8.3.0</appium.java.version>
-    <lombok.version>1.18.28</lombok.version>
-    <fixture.version>3.0.0</fixture.version>
-    <faker.version>1.0.2</faker.version>
-  </properties>
 
+
+    <!-- Default TestNG suite file - can be overridden from command line -->
+    <suite.xml.file>src/test/resources/testng.xml</suite.xml.file>
+  </properties>
 
   <build>
     <plugins>
-      <!-- Plugin para compilar en Java  8-->
+      <!-- Plugin para compilar en Java 8 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.8.1</version>  <!-- Down from 3.11.0 -->
         <configuration>
           <source>8</source>
           <target>8</target>
         </configuration>
-
       </plugin>
 
-      <!-- Plugin para ejecutar pruebas con TestNG -->
+      <!-- Enhanced Maven Surefire Plugin for CLI execution -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
+        <version>3.1.2</version>
         <configuration>
+          <!-- Default suite file -->
           <suiteXmlFiles>
-            <!-- Asegúrate de que el archivo testng.xml esté en la ruta correcta -->
-            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+            <suiteXmlFile>${suite.xml.file}</suiteXmlFile>
           </suiteXmlFiles>
+
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
-
   <dependencies>
-
-
-
-
-
-    <!--Selenium Server-->
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <!-- Selenium Server -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>${selenium.version}</version>
     </dependency>
 
-    <!--TestNG-->
+    <!-- TestNG -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>${testng.version}</version> <!-- Compatible with JDK 1.8,  7.7.0 needs 11 or higher-->
-      <!--  <scope>test</scope>-->
+      <version>${testng.version}</version>
     </dependency>
-    <!--WEB DRIVER-->
+
+    <!-- WebDriverManager -->
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
@@ -87,30 +74,6 @@
     </dependency>
 
 
-
-
-
-    <dependency>
-      <groupId>com.aventstack</groupId>
-      <artifactId>extentreports</artifactId>
-      <version>${extentreports.version}</version>
-    </dependency>
-
-
-
-    <dependency>
-      <groupId>org.uncommons</groupId>
-      <artifactId>reportng</artifactId>
-      <version>${reportng.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-
-
-
-
-
-
-
   </dependencies>
+
 </project>

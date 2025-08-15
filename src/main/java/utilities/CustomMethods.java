@@ -1,6 +1,5 @@
 package utilities;
 
-import base.BaseDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -11,7 +10,7 @@ private WebDriver driver;
 public CustomMethods(WebDriver driver) {
         this.driver = driver;
     }
-    public void navigateTo(String url, String expectedTitle) {
+    public void openPageAndValidateTitle(String url, String expectedTitle) {
         driver.get(url);
         System.out.println(driver.findElement(TITLE).getText());
         if (!driver.findElement(TITLE).getText().equals(expectedTitle)) {

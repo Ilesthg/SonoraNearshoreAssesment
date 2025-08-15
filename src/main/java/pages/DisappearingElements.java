@@ -1,9 +1,11 @@
 package pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import utilities.CustomMethods;
 
 import java.time.Duration;
 
@@ -13,23 +15,23 @@ public class DisappearingElements {
     private WebDriver driver;
     private WebDriverWait wait;
     private static final String PAGE_URL = "https://the-internet.herokuapp.com/disappearing_elements";
+    private static final String PAGE_TITLE = "Disappearing Elements";
     private static final By GALLERY_BUTTON = By.linkText("Gallery");
     private static final int MAX_REFRESH_ATTEMPTS = 10;
+    private CustomMethods customMethods;
 
 
     public DisappearingElements(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
+        this.customMethods = new CustomMethods(this.driver);
     }
 
     public DisappearingElements navigateToPage() {
-        driver.get(PAGE_URL);
+        customMethods.openPageAndValidateTitle(PAGE_URL, PAGE_TITLE);
         return this;
     }
 
-    /**
-     * Refreshes the page until the Gallery button becomes visible
-     */
     public void refreshUntilElementExists() {
         int attempts = 0;
         boolean elementFound = false;
@@ -45,12 +47,7 @@ public class DisappearingElements {
                 System.out.println("Attempt " + attempts + ": Gallery button not found, refreshing");
                 if (attempts < MAX_REFRESH_ATTEMPTS) {
                     driver.navigate().refresh();
-                  /*  // Small wait after refresh to let page load
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
-                    }*/
+                    waitForPageToLoad(Duration.ofSeconds(2));
                 }
             }
         }
@@ -60,9 +57,7 @@ public class DisappearingElements {
         }
     }
 
-    /**
-     * Refreshes the page until the Gallery button disappears
-     */
+
     public void refreshUntilElementNotExists() {
         int attempts = 0;
         boolean elementGone = false;
@@ -75,12 +70,7 @@ public class DisappearingElements {
                 System.out.println("Attempt " + attempts + ": Gallery button still exists, refreshing...");
                 if (attempts < MAX_REFRESH_ATTEMPTS) {
                     driver.navigate().refresh();
-                  /*  // Small wait after refresh to let page load
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
-                    }*/
+                    waitForPageToLoad(Duration.ofSeconds(2));
                 }
             } catch (NoSuchElementException e) {
                 elementGone = true;
@@ -102,10 +92,20 @@ public class DisappearingElements {
         }
     }
 
-    private void waitForLoad(Duration timeout) {
-        new WebDriverWait(driver, timeout).until(d -> ((JavascriptExecutor) d)
-                        .executeScript("return document.readyState")
-                        .equals("complete"));
+    private void waitForPageToLoad(Duration timeout) {
+
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                String readyState = (String) js.executeScript("return document.readyState");
+
+                return "complete".equals(readyState);
+            }
+        });
     }
 
 

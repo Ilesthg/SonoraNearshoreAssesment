@@ -30,12 +30,6 @@ public class jQueryUIMenus {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         this.actions = new Actions(driver);
 
-      /*  ChromeOptions options = new ChromeOptions();
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-        chromePrefs.put("download.default_directory", downloadFolder);
-        options.setExperimentalOption("prefs", chromePrefs);
-
-        driver = new ChromeDriver(options);*/
     }
 
     public jQueryUIMenus navigateToPage() {

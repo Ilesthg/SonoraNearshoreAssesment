@@ -9,10 +9,10 @@ import pages.DisappearingElements;
 public class DisappearingElementsTest extends BaseDriver {
 
 
-    @Test
+    @Test(description = "Verify if the Gallery button disappears and reappears upon refreshing the page")
     public void testDisappearingGalleryButton() {
-        DisappearingElements disappearingElementsPage = new DisappearingElements(driver,wait);
-     disappearingElementsPage.navigateToPage().refreshUntilElementExists();
+        DisappearingElements disappearingElementsPage = new DisappearingElements(driver, wait);
+        disappearingElementsPage.navigateToPage().refreshUntilElementExists();
         Assert.assertTrue(disappearingElementsPage.isElementPresent(), "Gallery button should be visible after refresh.");
 
         disappearingElementsPage.refreshUntilElementNotExists();

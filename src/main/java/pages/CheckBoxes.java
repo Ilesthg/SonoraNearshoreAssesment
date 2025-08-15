@@ -36,7 +36,7 @@ public class CheckBoxes {
     }
 
     public CheckBoxes navigateTo() {
-       customMethods.navigateTo(URL, EXPECTED_PAGE_TITLE);
+       customMethods.openPageAndValidateTitle(URL, EXPECTED_PAGE_TITLE);
         return this;
     }
 
@@ -62,21 +62,15 @@ public class CheckBoxes {
     }
 
     public boolean isSelectCheckBox(String value) {
-        System.out.println(hm.get(value).isSelected());
         return hm.get(value).isSelected();
     }
 
-    public void checkABox(String value) {
+    public void checkBox(String value) {
         if (!hm.get(value).isSelected()) {
             hm.get(value).click();
         }
     }
-   /* public void clickOnCheckBox(String checkboxName) {
-        WebElement checkbox = driver.findElements(CHECKBOXES).get(index);
-        if (!checkbox.isSelected()) {
-            checkbox.click();
-        }
-    }*/
+
 
 
 }

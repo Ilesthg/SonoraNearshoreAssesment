@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import pages.jQueryUIMenus;
 
 public class jQueryUIMenusTest extends BaseDriver {
-    @Test
+    @Test(description = "Verify if the user is able to download the Excel file from the jQuery UI Menus page")
     public void testExcelFileDownload() throws InterruptedException {
         jQueryUIMenus menus = new jQueryUIMenus(driver);
         menus.navigateToPage()

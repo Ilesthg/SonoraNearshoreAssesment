@@ -9,9 +9,10 @@ import org.testng.annotations.*;
 import java.time.Duration;
 import java.util.Objects;
 
-public  class BaseDriver {
+public class BaseDriver {
     protected BaseDriver() {
     }
+
     private static final int TIMEOUT_SECONDS = 5;
 
     protected WebDriver driver;
@@ -21,7 +22,8 @@ public  class BaseDriver {
     @BeforeClass
     protected void initDriver() {
 
-            driver = DriverFactory.getLocalDriver(Browsers.CHROME);
+
+        driver = DriverFactory.getLocalDriver(Browsers.CHROME);
 
 
         this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(3));
@@ -29,12 +31,12 @@ public  class BaseDriver {
         this.driver.manage().window().maximize();
 
     }
- /*    @AfterMethod
-     protected void closeDriver() {
-         this.driver.quit();
 
-     }
-*/
+    @AfterMethod
+    protected void closeDriver() {
+        this.driver.quit();
+
+    }
 
 
 }

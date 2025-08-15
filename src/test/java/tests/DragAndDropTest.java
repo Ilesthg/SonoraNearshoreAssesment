@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pages.DragAndDrop;
 
 public class DragAndDropTest extends BaseDriver {
-    @Test
+    @Test(description = "Verify if the user is able to drag and drop the element A to element B and vice versa")
     public void dragAndDropTest() {
         DragAndDrop dragAndDrop = new DragAndDrop(driver, wait);
 //Drag and drop the box A to the box B.
